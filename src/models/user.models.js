@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchma = new Schema(
   {
@@ -27,6 +28,9 @@ const userSchma = new Schema(
     likedinProfile: {
       type: String,
     },
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -40,10 +44,33 @@ userSchma.pre("save", async function (next) {
   );
   next();
 });
-// rocess.env.SALT_ROUNDS
 
 userSchma.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
+};
+
+userSchma.methods.generateAccessToken = async function () {
+  const tokenData = {
+    _id: this._id,
+    username: this.username,
+    email: this.email,
+  };
+
+  return jwt.sign(tokenData, process.env.ACCESS_TOKEN_SECRETE_KEY, {
+    expiresIn: process.env.ACCESS_TOKEN_EXPIRY_TIME,
+  });
+};
+
+userSchma.methods.generateRefreshToken = async function () {
+  const tokenData = {
+    _id: this._id,
+    username: this.username,
+    email: this.email,
+  };
+
+  return jwt.sign(tokenData, process.env.REFRESH_TOKEN_SECRETE_KEY, {
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY_TIME,
+  });
 };
 
 export const User = mongoose.model("User", userSchma);
