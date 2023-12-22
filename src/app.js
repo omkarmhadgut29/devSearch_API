@@ -8,9 +8,14 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// * user router
+// Routers
 import { userRouter } from "./routes/user.routes.js";
+import { projectRouter } from "./routes/project.routes.js";
 
+// * user router
 app.use("/api/v1/user", userRouter);
+
+//* product router
+app.use("/api/v1/projects", projectRouter);
 
 export { app };
