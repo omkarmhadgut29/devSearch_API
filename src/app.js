@@ -11,11 +11,15 @@ app.use(cookieParser());
 // Routers
 import { userRouter } from "./routes/user.routes.js";
 import { projectRouter } from "./routes/project.routes.js";
+import { commentRouter } from "./routes/comment.routes.js";
 
 // * user router
 app.use("/api/v1/user", userRouter);
 
 //* product router
 app.use("/api/v1/projects", projectRouter);
+
+//* comment router
+app.use("/api/v1/comments", commentRouter);
 
 export { app };
