@@ -78,9 +78,13 @@ const updateReply = asyncHandler(async (req, res) => {
 
   await reply.save();
 
-  return res
-    .status(200)
-    .json({ message: "Comment reply updated successfully...", reply });
+  return res.status(200).json({
+    message: "Comment reply updated successfully...",
+    reply: {
+      message: reply.message,
+      _id: reply._id,
+    },
+  });
 });
 
 const deleteReply = asyncHandler(async (req, res) => {

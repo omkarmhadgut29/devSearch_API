@@ -13,6 +13,7 @@ import { userRouter } from "./routes/user.routes.js";
 import { projectRouter } from "./routes/project.routes.js";
 import { commentRouter } from "./routes/comment.routes.js";
 import { replyRouter } from "./routes/reply.routes.js";
+import { reviewRouter } from "./routes/review.routes.js";
 
 // * user router
 app.use("/api/v1/user", userRouter);
@@ -25,5 +26,8 @@ app.use("/api/v1/comments", commentRouter);
 
 // Replies router
 app.use("/api/v1/replies", replyRouter);
+
+//Review Router
+app.use("/api/v1/reviews", reviewRouter);
 
 export { app };
