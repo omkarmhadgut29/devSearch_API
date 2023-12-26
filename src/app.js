@@ -12,6 +12,7 @@ app.use(cookieParser());
 import { userRouter } from "./routes/user.routes.js";
 import { projectRouter } from "./routes/project.routes.js";
 import { commentRouter } from "./routes/comment.routes.js";
+import { replyRouter } from "./routes/reply.routes.js";
 
 // * user router
 app.use("/api/v1/user", userRouter);
@@ -21,5 +22,8 @@ app.use("/api/v1/projects", projectRouter);
 
 //* comment router
 app.use("/api/v1/comments", commentRouter);
+
+// Replies router
+app.use("/api/v1/replies", replyRouter);
 
 export { app };
