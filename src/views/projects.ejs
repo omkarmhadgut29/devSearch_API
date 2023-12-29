@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body class="text-[#aea6a6] bg-[#0c0f12] text-[20px]">
+
+    <div class="flex justify-center items-center min-h-[100vh]">
+        <div class="w-[700px] flex justify-center items-center">
+            <div>
+                <div class="text-[20px] text-center ">
+                    Projects Page
+                </div>
+                <hr class="my-[20px]">
+                <table class=" border-white">
+                    <thead>
+                        <tr class="border-b-[1px] border-solid border-[#aea6a6]">
+                            <th class="pr-[20px] pb-[20px] ">Title</th>
+                            <th class="pb-[20px]">Decription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% context.projects.forEach(project => { %>
+                        <tr data-project-id="<%= project._id %>" class="projectTr">
+                            <td class="pr-[20px] pt-[10px]"><%= project.title %></td>
+                            <td class="pt-[15px]"><%= project.description %></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="./scripts/projects.js"></script>
+</body>
+
+</html>
