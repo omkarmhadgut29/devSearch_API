@@ -9,7 +9,7 @@ const indexController = (req, res) => {
 
   //   return res.redirect("/projects");
   const context = {};
-  return res.render("index", { context });
+  return res.status(200).render("index", { context });
 };
 
 const loginController = (req, res) => {
@@ -17,7 +17,7 @@ const loginController = (req, res) => {
     path: "login",
   };
 
-  return res.render("login", { context });
+  return res.status(200).render("login", { context });
 };
 
 const getAllprojectsController = asyncHandler(async (req, res) => {
@@ -34,13 +34,26 @@ const getAllprojectsController = asyncHandler(async (req, res) => {
     projects,
   };
 
-  res.render("projects", { context });
+  // return res.status(200);
+  return res.status(200).render("projects", { context });
 });
 
 const getProjectController = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const project = await fetch(`http://localhost:3000/api/v1/projects/${id}`);
+  const response = await fetch(`http://localhost:3000/api/v1/projects/${id}`);
+  const project = await response.json();
+
+  const context = {
+    project: project.project,
+  };
+
+  res.render("projectDetails", { context });
 });
 
-export { indexController, loginController, getAllprojectsController };
+export {
+  indexController,
+  loginController,
+  getAllprojectsController,
+  getProjectController,
+};

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSearch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body class="text-[#aea6a6] bg-[#0c0f12] text-[20px]">
+
+    <%- // console.log(context.project); %>
+    <div class="flex justify-center items-center min-h-[100vh]">
+        <div>
+            <div class="mb-[20px] text-[red] text-[25px]">
+                <h1>Project Details</h1>
+            </div>
+            <div>
+                <h1>Title: <%- context.project.title %></h1>
+                <h1>Description: <%- context.project.description %></h1>
+                <h1>Created At: <%- context.project.createdAt.slice(0, 10) %></h1>
+                <h1>Updated At: <%- context.project.updatedAt.slice(0, 10) %></h1>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src=".././scripts/projectDetails.js"></script>
+</body>
+
+</html>

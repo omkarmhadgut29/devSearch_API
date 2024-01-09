@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  getAllProjects,
   loginUser,
   refreshAccessToken,
   registerUser,
@@ -8,6 +9,7 @@ import {
 const router = Router();
 
 router.route("/login").post(loginUser);
+router.route("/projects").get(getAllProjects);
 
 router.route("/register").post(registerUser);
 

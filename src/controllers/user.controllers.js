@@ -143,4 +143,54 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   });
 });
 
-export { registerUser, loginUser, refreshAccessToken };
+const getAllProjects = asyncHandler(async (req, res) => {
+  const id = req.body.id;
+
+  // const user = User.findById(id);
+
+  const projects = await User.aggregate([
+    {
+      $match: {
+        username: id,
+      },
+    },
+    {
+      $lookup: {
+        from: "projects",
+        localField: "_id",
+        foreignField: "owner",
+        as: "userProjects",
+      },
+    },
+    {
+      $addFields: {
+        projectCount: {
+          $size: "$userProjects",
+        },
+        // projectDetails: ["$userProjects.title", "$userProjects.description"],
+        projectDetails: {
+          title: "$userProjects.title",
+          desc: "$userProjects.description",
+        },
+      },
+    },
+    {
+      $project: {
+        username: 1,
+        projectCount: 1,
+        userProjects: 1,
+        projectDetails: 1,
+      },
+    },
+  ]);
+
+  if (!projects) {
+    return res.json({ message: "Error" });
+  }
+
+  console.log(projects);
+
+  return res.json({ projects });
+});
+
+export { registerUser, loginUser, refreshAccessToken, getAllProjects };
